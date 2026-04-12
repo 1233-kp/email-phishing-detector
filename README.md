@@ -2,6 +2,13 @@
 
 An AI + Machine Learning based web application that detects phishing emails using Natural Language Processing (NLP).
 
+## 📂 Dataset
+
+Due to size limitations, the dataset is not included in this repository.
+
+You can download it from:
+👉 https://www.kaggle.com/ (search: Phishing Email Dataset)
+
 ## 🚀 Features
 - ⚡ Fast prediction using TF-IDF + Naive Bayes
 - 🤖 Optional AI analysis (Transformer-based)
