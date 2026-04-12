@@ -1,5 +1,4 @@
-app.py
-train_model.py
-model.pkl
-vectorizer.pkl
-requirements.txt
+streamlit
+pandas
+scikit-learn
+nltk
