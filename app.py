@@ -6,7 +6,6 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
-# Load ML model (FAST ⚡)
 model = pickle.load(open("model.pkl", "rb"))
 vectorizer = pickle.load(open("vectorizer.pkl", "rb"))
 
@@ -27,7 +26,6 @@ def clean_text(text):
 def extract_urls(text):
     return re.findall(r'(https?://\S+)', text)
 
-# 🎨 UI Config
 st.set_page_config(page_title="Email Phishing Detector", page_icon="📧")
 
 st.title("📧 AI + ML Email Phishing Detection System")
@@ -35,7 +33,6 @@ st.markdown("### ⚡ Fast ML + 🤖 Optional AI Analysis")
 
 st.markdown("---")
 
-# 📂 File Upload
 uploaded_file = st.file_uploader("📂 Upload Email (.txt)", type=["txt"])
 
 if uploaded_file:
@@ -44,17 +41,14 @@ if uploaded_file:
 else:
     user_input = st.text_area("✉️ Enter Email Message")
 
-# 🤖 AI Toggle
 use_ai = st.checkbox("🤖 Enable AI Deep Analysis (slower)")
 
-# 🔍 Analyze Button
 if st.button("🚀 Analyze Email"):
     if user_input.strip() == "":
         st.warning("⚠️ Please enter or upload a message")
     else:
         st.markdown("---")
 
-        # 🔹 ML Prediction
         msg_clean = clean_text(user_input)
         msg_vec = vectorizer.transform([msg_clean])
 
@@ -68,19 +62,16 @@ if st.button("🚀 Analyze Email"):
         else:
             st.success("✅ This is a SAFE Email")
 
-        # 📊 Confidence
         st.write(f"Phishing: {prob[0][0]*100:.2f}%")
         st.write(f"Safe: {prob[0][1]*100:.2f}%")
         st.progress(int(max(prob[0]) * 100))
 
-        # 🔗 URL Detection
         urls = extract_urls(user_input)
         if urls:
             st.subheader("🔗 Links Found")
             for url in urls:
                 st.write(url)
 
-        # 🤖 Optional AI
         if use_ai:
             with st.spinner("Running AI analysis..."):
                 from transformers import pipeline
