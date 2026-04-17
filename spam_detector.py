@@ -19,19 +19,15 @@ df = pd.read_csv("Phishing_Email.csv")
 
 print("Columns:", df.columns)
 
-# Rename columns
 df = df.rename(columns={
     'Email Text': 'message',
     'Email Type': 'label'
 })
 
-# Keep only needed columns
 df = df[['label', 'message']]
 
-# Remove missing values
 df.dropna(subset=['message'], inplace=True)
 
-# Convert to string
 df['message'] = df['message'].astype(str)
 
 stemmer = PorterStemmer()
